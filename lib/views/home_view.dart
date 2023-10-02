@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoro_task_timer/views/timer_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -7,9 +8,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+        body: TimerView(),
       ),
     );
   }
