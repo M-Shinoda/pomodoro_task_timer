@@ -18,15 +18,18 @@ class TimerView extends HookConsumerWidget {
       return;
     }, const []);
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(
-          timeKeeper.remainingDuration.inSeconds.toString(),
-          textAlign: TextAlign.center,
-        )
-      ],
+    return Container(
+      color: timeKeeper.isActive ? null : Colors.red,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            timeKeeper.remainingDuration.inSeconds.toString(),
+            textAlign: TextAlign.center,
+          )
+        ],
+      ),
     );
   }
 }
