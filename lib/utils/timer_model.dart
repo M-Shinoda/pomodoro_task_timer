@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pomodoro_task_timer/utils/time_keeper_model.dart';
+import 'package:pomodoro_task_timer/freezed/time_keeper_model.dart';
 
 final checkTimerProvider = ChangeNotifierProvider((ref) => CheckTimerModel());
 

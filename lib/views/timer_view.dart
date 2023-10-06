@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pomodoro_task_timer/utils/time_keeper_model.dart';
+import 'package:pomodoro_task_timer/freezed/time_keeper_model.dart';
 import 'package:pomodoro_task_timer/utils/timer_model.dart';
 
 class TimerView extends HookConsumerWidget {
