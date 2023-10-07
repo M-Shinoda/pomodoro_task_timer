@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pomodoro_task_timer/freezed/task_state.dart';
+import 'package:pomodoro_task_timer/utils/timer.dart';
 
 class TaskTimer extends HookConsumerWidget {
   final TaskState task;
@@ -11,6 +12,7 @@ class TaskTimer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isRunning = ref.watch(taskListProvider
         .select((tasks) => tasks.any((t) => t.id == task.id && t.isRunning)));
+    final _ = ref.read(timerProvider.notifier);
 
     return ListTile(
       title: Text(task.title),
