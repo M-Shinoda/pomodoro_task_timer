@@ -13,6 +13,7 @@ dependencies:
   hooks_riverpod: ^2.4.1
   freezed_annotation: ^2.2.0
   uuid: ^4.1.0
+  duration_picker: ^1.1.1
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pomodoro_task_timer/freezed/task_state.dart';
+import 'package:pomodoro_task_timer/utils/add_task_dialog.dart';
 import 'package:pomodoro_task_timer/views/timer_view.dart';
 
 class HomeView extends ConsumerWidget {
@@ -13,8 +14,11 @@ class HomeView extends ConsumerWidget {
         body: const TimerView(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            ref.read(taskListProvider.notifier).addTask(TaskState.create(
-                title: "Task hoge", duration: const Duration(minutes: 50)));
+            addTaskDialog(context, (String title, Duration duration) {
+              ref
+                  .read(taskListProvider.notifier)
+                  .addTask(TaskState.create(title: title, duration: duration));
+            });
           },
           child: const Icon(Icons.add),
         ),
