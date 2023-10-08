@@ -5,7 +5,7 @@ import 'package:pomodoro_task_timer/views/home_view.dart';
 void main() {
   runApp(
     const ProviderScope(
-      child: HomeView(),
+      child: MaterialApp(home: HomeView()),
     ),
   );
 }
