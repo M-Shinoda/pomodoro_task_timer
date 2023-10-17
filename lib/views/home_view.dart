@@ -11,7 +11,9 @@ class HomeView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       home: Scaffold(
-        body: const TimerView(),
+        body: const SafeArea(
+          child: TimerView(),
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             addTaskDialog(context, (String title, Duration duration) {
