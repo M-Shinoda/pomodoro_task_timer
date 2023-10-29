@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pomodoro_task_timer/freezed/task_base.dart';
 import 'package:pomodoro_task_timer/freezed/task_state.dart';
 import 'package:pomodoro_task_timer/utils/timer.dart';
 
 class TaskTimer extends HookConsumerWidget {
-  final TaskState task;
+  final TaskBase task;
 
   const TaskTimer({required this.task, super.key});
 
@@ -13,11 +14,10 @@ class TaskTimer extends HookConsumerWidget {
     final _ = ref.read(timerProvider.notifier);
     final isRunning = ref.watch(taskListProvider
         .select((tasks) => tasks.any((t) => t.id == task.id && t.isRunning)));
-    final remainingDurationInSeconds = ref.watch(taskListProvider.select(
-        (tasks) => tasks
-            .firstWhere((t) => t.id == task.id)
-            .remainingDuration
-            .inSeconds));
+    final remainingDurationInSeconds =
+        ref.watch(taskListProvider.select((tasks) {
+      return tasks.firstWhere((t) => t.id == task.id).displayTime.inSeconds;
+    }));
 
     return ListTile(
       title: Text(task.title),

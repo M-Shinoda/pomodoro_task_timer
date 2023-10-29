@@ -3,6 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pomodoro_task_timer/component/timer_indicator_component.dart';
+import 'package:pomodoro_task_timer/freezed/count_down_task_state.dart';
+import 'package:pomodoro_task_timer/freezed/count_up_task_state.dart';
 import 'package:pomodoro_task_timer/freezed/task_state.dart';
 import 'package:pomodoro_task_timer/utils/task_tile.dart';
 
@@ -19,10 +21,12 @@ class TimerView extends HookConsumerWidget {
 
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref.read(taskListProvider.notifier).addTask(TaskState.create(
-            title: 'Task 1', duration: const Duration(seconds: 10)));
-        ref.read(taskListProvider.notifier).addTask(TaskState.create(
-            title: 'Task 2', duration: const Duration(seconds: 20)));
+        ref.read(taskListProvider.notifier).addTask(CountDownTaskState.create(
+            title: 'Task 1', duration: const Duration(seconds: 5)));
+        ref.read(taskListProvider.notifier).addTask(CountDownTaskState.create(
+            title: 'Task 2', duration: const Duration(seconds: 3)));
+        ref.read(taskListProvider.notifier).addTask(CountUpTaskState.create(
+            title: 'Task 2', duration: const Duration(seconds: 5)));
       });
 
       return null;
@@ -47,10 +51,9 @@ class TimerView extends HookConsumerWidget {
     useEffect(() {
       if (selectedTask == null) return;
       controller.animateTo(
-          (1.0 -
-              selectedTask.remainingDuration.inMilliseconds /
-                  selectedTask.duration.inMilliseconds),
-          curve: Curves.bounceIn);
+        selectedTask.elapsedTimeRatio(),
+        curve: Curves.bounceIn,
+      );
       return null;
     }, [selectedTask]);
 

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_task_timer/component/duration_picker_component.dart';
 
-Future<void> addTaskDialog(BuildContext context,
-    Function(String title, Duration duration) submitCallback) {
+Future<void> addTaskDialog(
+    BuildContext context,
+    Function(
+      String title,
+      Duration duration,
+      bool isCountDown,
+    ) submitCallback) {
   final controller = TextEditingController();
   Duration duration = Duration.zero;
+  bool isCountDown = true;
   return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
@@ -19,7 +25,24 @@ Future<void> addTaskDialog(BuildContext context,
                   const SizedBox(height: 20),
                   DurationPickerComponent(callback: (Duration pickerDuration) {
                     duration = pickerDuration;
-                  })
+                  }),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                            onPressed: () {
+                              isCountDown = false;
+                            },
+                            child: const Text("Up")),
+                        ElevatedButton(
+                            onPressed: () {
+                              isCountDown = true;
+                            },
+                            child: const Text("Down"))
+                      ],
+                    ),
+                  ),
                 ]),
             actions: <Widget>[
               TextButton(
@@ -33,7 +56,7 @@ Future<void> addTaskDialog(BuildContext context,
                   ),
                   child: const Text('Submit'),
                   onPressed: () {
-                    submitCallback(controller.text, duration);
+                    submitCallback(controller.text, duration, isCountDown);
                     Navigator.of(context).pop();
                   })
             ]);

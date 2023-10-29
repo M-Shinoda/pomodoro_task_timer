@@ -1,43 +1,23 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:uuid/uuid.dart';
+import 'package:pomodoro_task_timer/freezed/count_down_task_state.dart';
+import 'package:pomodoro_task_timer/freezed/count_up_task_state.dart';
+import 'package:pomodoro_task_timer/freezed/task_base.dart';
 
-part 'task_state.freezed.dart';
-
-@freezed
-abstract class TaskState with _$TaskState {
-  const factory TaskState({
-    required String id,
-    required String title,
-    required Duration duration,
-    @Default(false) bool isRunning,
-    @Default(Duration.zero) Duration remainingDuration,
-  }) = _TaskState;
-
-  factory TaskState.create(
-          {required String title, required Duration duration}) =>
-      TaskState(
-          id: const Uuid().v8(),
-          title: title,
-          duration: duration,
-          remainingDuration: duration);
-}
-
-final taskListProvider = StateNotifierProvider<TaskList, List<TaskState>>(
+final taskListProvider = StateNotifierProvider<TaskList, List<TaskBase>>(
   (ref) => TaskList(),
 );
 
-class TaskList extends StateNotifier<List<TaskState>> {
+class TaskList extends StateNotifier<List<TaskBase>> {
   TaskList() : super([]);
 
-  void addTask(TaskState task) {
+  void addTask(TaskBase task) {
     state = [...state, task];
   }
 
   void startTask(String id) {
     state = state.map((task) {
       if (task.id == id) {
-        return task.copyWith(isRunning: true);
+        return copyWithDivideTaskStateClass(task, isRunning: true);
       } else {
         return task;
       }
@@ -47,14 +27,14 @@ class TaskList extends StateNotifier<List<TaskState>> {
   void stopTask(String id) {
     state = state.map((task) {
       if (task.id == id) {
-        return task.copyWith(isRunning: false);
+        return copyWithDivideTaskStateClass(task, isRunning: false);
       } else {
         return task;
       }
     }).toList();
   }
 
-  void updateTask(String id, TaskState updatedTask) {
+  void updateTask(String id, TaskBase updatedTask) {
     state = state.map((task) {
       if (task.id == id) {
         return updatedTask;
@@ -62,5 +42,32 @@ class TaskList extends StateNotifier<List<TaskState>> {
         return task;
       }
     }).toList();
+  }
+
+  TaskBase copyWithDivideTaskStateClass(TaskBase task,
+      {String? id,
+      String? title,
+      Duration? duration,
+      bool? isRunning,
+      Duration? remainingDuration}) {
+    switch (task.runtimeType) {
+      case CountDownTaskState:
+        return (task as CountDownTaskState).copyWith(
+          id: id,
+          title: title,
+          isRunning: isRunning,
+          remainingDuration: remainingDuration,
+        );
+
+      case CountUpTaskState:
+        return (task as CountUpTaskState).copyWith(
+          id: id,
+          title: title,
+          isRunning: isRunning,
+          duration: duration,
+        );
+      default:
+        throw ("invalid class");
+    }
   }
 }
