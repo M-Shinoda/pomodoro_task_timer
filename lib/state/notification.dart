@@ -28,7 +28,7 @@ class NotificationViewModel {
         StreamController<ReceivedNotification>.broadcast();
 
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('app_icon');
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
     final DarwinInitializationSettings initializationSettingsDarwin =
         DarwinInitializationSettings(
@@ -88,7 +88,10 @@ class NotificationViewModel {
       subtitle: 'the subtitle',
     );
     const NotificationDetails notificationDetails = NotificationDetails(
-        iOS: darwinNotificationDetails, macOS: darwinNotificationDetails);
+        android: AndroidNotificationDetails('channel id', 'channel name',
+            importance: Importance.max),
+        iOS: darwinNotificationDetails,
+        macOS: darwinNotificationDetails);
     await flutterLocalNotificationsPlugin.show(
         id++, 'task timer finished', '終了しました。', notificationDetails,
         payload: 'item x');
