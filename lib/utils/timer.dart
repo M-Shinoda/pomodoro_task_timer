@@ -3,8 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pomodoro_task_timer/freezed/task_state.dart';
 import 'package:pomodoro_task_timer/utils/notification.dart';
 
-final timerProvider = ChangeNotifierProvider((ref) {
-  const checkPoolingDuration = Duration(milliseconds: 250);
+final timerProvider = StateProvider((ref) {
+  const checkPoolingDuration = Duration(milliseconds: 20);
   void notification() {
     ref.read(notificationProvider).showNotificationWithSubtitle();
   }
