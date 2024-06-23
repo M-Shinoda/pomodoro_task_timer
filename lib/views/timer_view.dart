@@ -58,7 +58,7 @@ class TimerView extends HookConsumerWidget {
     }, [selectedTask]);
 
     return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Expanded(flex: 1, child: timer_indicator_component(controller)),
+      Expanded(flex: 1, child: timerIndicatorComponent(controller)),
       Expanded(
           flex: 1,
           child: SingleChildScrollView(child: Column(children: taskTiles)))

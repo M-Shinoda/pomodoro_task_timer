@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget timer_indicator_component(AnimationController controller) {
+Widget timerIndicatorComponent(AnimationController controller) {
   return Center(
       child: Container(
           padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
