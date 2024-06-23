@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pomodoro_task_timer/freezed/task_base.dart';
-import 'package:pomodoro_task_timer/freezed/task_state.dart';
+import 'package:pomodoro_task_timer/state/task_state.dart';
 import 'package:pomodoro_task_timer/state/timer.dart';
 
 class TaskTimer extends HookConsumerWidget {

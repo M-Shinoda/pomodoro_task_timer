@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pomodoro_task_timer/freezed/count_down_task_state.dart';
 import 'package:pomodoro_task_timer/freezed/count_up_task_state.dart';
-import 'package:pomodoro_task_timer/freezed/task_state.dart';
+import 'package:pomodoro_task_timer/state/task_state.dart';
 import 'package:pomodoro_task_timer/utils/add_task_dialog.dart';
 import 'package:pomodoro_task_timer/views/timer_view.dart';
 

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pomodoro_task_timer/component/task_tile.dart';
 import 'package:pomodoro_task_timer/component/timer_indicator_component.dart';
 import 'package:pomodoro_task_timer/freezed/count_down_task_state.dart';
 import 'package:pomodoro_task_timer/freezed/count_up_task_state.dart';
-import 'package:pomodoro_task_timer/freezed/task_state.dart';
-import 'package:pomodoro_task_timer/utils/task_tile.dart';
+import 'package:pomodoro_task_timer/state/task_state.dart';
 
 class TimerView extends HookConsumerWidget {
   const TimerView({super.key});
