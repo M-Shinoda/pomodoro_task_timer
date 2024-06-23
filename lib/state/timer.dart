@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pomodoro_task_timer/freezed/task_state.dart';
-import 'package:pomodoro_task_timer/utils/notification.dart';
+import 'package:pomodoro_task_timer/state/notification.dart';
 
 final timerProvider = StateProvider((ref) {
   const checkPoolingDuration = Duration(milliseconds: 20);
