@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:pomodoro_task_timer/freezed/task_base.dart';
 import 'package:uuid/uuid.dart';
 
