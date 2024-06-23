@@ -14,10 +14,6 @@ class TimerView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final taskList = ref.watch(taskListProvider);
-    final controller = useAnimationController(
-        duration: const Duration(milliseconds: 250),
-        animationBehavior: AnimationBehavior.preserve);
-    final selectTaskId = useState<String?>(null);
 
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -28,37 +24,15 @@ class TimerView extends HookConsumerWidget {
         ref.read(taskListProvider.notifier).addTask(CountUpTaskState.create(
             title: 'Task 2', duration: const Duration(seconds: 5)));
       });
-
       return null;
     }, const []);
 
-    final taskTiles = useMemoized(
-        () => taskList
-            .map((task) => GestureDetector(
-                onTap: () {
-                  selectTaskId.value = task.id;
-                },
-                child: TaskTimer(task: task)))
-            .toList(),
-        [taskList]);
-
-    final selectedTask = useMemoized(() {
-      if (selectTaskId.value == null) return null;
-      return taskList[
-          taskList.indexWhere((task) => task.id == selectTaskId.value)];
-    }, [taskList, selectTaskId.value]);
-
-    useEffect(() {
-      if (selectedTask == null) return;
-      controller.animateTo(
-        selectedTask.elapsedTimeRatio(),
-        curve: Curves.bounceIn,
-      );
-      return null;
-    }, [selectedTask]);
+    final taskTiles = taskList.map((task) {
+      return TaskTimer(task: task);
+    }).toList();
 
     return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Expanded(flex: 1, child: timerIndicatorComponent(controller)),
+      const Expanded(flex: 1, child: TimerIndicator()),
       Expanded(
           flex: 1,
           child: SingleChildScrollView(child: Column(children: taskTiles)))
