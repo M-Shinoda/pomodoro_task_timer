@@ -32,10 +32,18 @@ class TimerView extends HookConsumerWidget {
     }).toList();
 
     return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      const Expanded(flex: 1, child: TimerIndicator()),
+      const Expanded(
+        flex: 1,
+        child: TimerIndicator(),
+      ),
       Expanded(
-          flex: 1,
-          child: SingleChildScrollView(child: Column(children: taskTiles)))
+        flex: 1,
+        child: SingleChildScrollView(
+          child: Column(
+            children: taskTiles,
+          ),
+        ),
+      )
     ]);
   }
 }

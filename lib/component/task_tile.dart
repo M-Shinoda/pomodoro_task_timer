@@ -33,6 +33,7 @@ class TaskTimer extends HookConsumerWidget {
             if (isRunning) {
               ref.read(taskListProvider.notifier).stopTask(task.id);
             } else {
+              ref.read(selectedTaskId.notifier).state = task.id;
               ref.read(taskListProvider.notifier).startTask(task.id);
             }
           },
